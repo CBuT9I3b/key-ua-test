@@ -1,0 +1,11 @@
+.control--panel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.message {
+  position: absolute;
+  width: 450px;
+  top: 0;
+}
