@@ -34,7 +34,7 @@ Build a countdown timer SPA in a framework library of your choosing (ie - React,
 
 ### Runs this app in development mode:
 
-1. `npm install` or `yarn install`: initializes the development of a package.
+1. `npm install` or `yarn install`: installs all the dependencies defined in a package.json file.
 2. `npm start` or `yarn start`: runs the app in development mode.
 3.  Open http://localhost:3000 to view it in the browser.
 4. `npm test` or `yarn test`: runs the test watcher in an interactive mode.
