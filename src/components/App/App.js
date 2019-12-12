@@ -1,6 +1,6 @@
 import React from 'react'
 
-import CountdownTimer from './CountdownTimer'
+import { CountdownTimer } from '..'
 
 import './App.css'
 

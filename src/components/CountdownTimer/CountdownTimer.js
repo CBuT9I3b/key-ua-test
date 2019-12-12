@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 
-import Button from './Button'
-import SelectSpeed from './SelectSpeed'
-import ClockFace from './ClockFace'
-import InputPanel from './InputPanel'
+import { Button, ClockFace, SelectSpeed, InputPanel } from '..'
 
 import './CountdownTimer.css'
 
