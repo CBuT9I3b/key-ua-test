@@ -4,6 +4,8 @@ import { Button, ClockFace, SelectSpeed, InputPanel } from '..'
 
 import './CountdownTimer.css'
 
+const isTest = process.env.NODE_ENV === 'test';
+
 class CountdownTimer extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +24,7 @@ class CountdownTimer extends Component {
       secondsRemaining: time
     });
 
-    this.resetWarning();
+    !isTest && this.resetWarning();
 
     console.log('--- set time ---')
   };
@@ -79,14 +81,14 @@ class CountdownTimer extends Component {
       pause: false
     });
 
-    this.resetWarning();
+    !isTest && this.resetWarning();
 
     console.log('--- reset ---')
   };
 
   changeSpeed = event => {
     this.setState(
-      { speed: event.target.value },
+      { speed: +event.target.value },
       () => {
         if (this.state.runs && !this.state.pause) {
           clearInterval(this.interval);
