@@ -93,6 +93,8 @@ class CountdownTimer extends Component {
 
         <ClockFace
           time={secondsRemaining}
+          startTime={startTime}
+          secondsRemaining={secondsRemaining}
         />
 
         <div className='control--panel'>
