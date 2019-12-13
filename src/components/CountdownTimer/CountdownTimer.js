@@ -24,43 +24,33 @@ class CountdownTimer extends Component {
       secondsRemaining: time
     });
 
-    !isTest && this.resetWarning();
-
-    console.log('--- set time ---')
+    !isTest && this.resetWarning()
   };
 
   tick = () => {
     if (this.state.secondsRemaining === 0) {
       this.final()
     } else {
-      this.setState(state => ({ secondsRemaining: --state.secondsRemaining }));
-
-      console.log(`--- tick, seconds remaining ${this.state.secondsRemaining} ---`)
+      this.setState(state => ({ secondsRemaining: --state.secondsRemaining }))
     }
   };
 
   start = () => {
     this.interval = setInterval(this.tick, 1000 / this.state.speed);
 
-    this.setState({ runs: true });
-
-    console.log('--- start ---')
+    this.setState({ runs: true })
   };
 
   pause = () => {
     clearInterval(this.interval);
 
-    this.setState({ pause: true });
-
-    console.log('--- pause ---')
+    this.setState({ pause: true })
   };
 
   resume  = () => {
     this.interval = setInterval(this.tick, 1000 / this.state.speed);
 
-    this.setState({ pause: false });
-
-    console.log('--- resume ---')
+    this.setState({ pause: false })
   };
 
   final = () => {
@@ -68,9 +58,7 @@ class CountdownTimer extends Component {
 
     this.setState({ runs: false });
 
-    this.startWarning();
-
-    console.log('--- final ---')
+    this.startWarning()
   };
 
   reset = () => {
@@ -81,9 +69,7 @@ class CountdownTimer extends Component {
       pause: false
     });
 
-    !isTest && this.resetWarning();
-
-    console.log('--- reset ---')
+    !isTest && this.resetWarning()
   };
 
   changeSpeed = event => {
@@ -95,8 +81,6 @@ class CountdownTimer extends Component {
 
           this.interval = setInterval(this.tick, 1000 / this.state.speed);
         }
-
-        console.log(`--- new speed ${this.state.speed} ---`)
       }
     )
   };
