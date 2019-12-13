@@ -4,8 +4,6 @@ import { Button, ClockFace, SelectSpeed, InputPanel } from '..'
 
 import './CountdownTimer.css'
 
-const isTest = process.env.NODE_ENV === 'test';
-
 class CountdownTimer extends Component {
   constructor(props) {
     super(props);
@@ -22,9 +20,7 @@ class CountdownTimer extends Component {
     this.setState({
       startTime: time,
       secondsRemaining: time
-    });
-
-    !isTest && this.resetWarning()
+    })
   };
 
   tick = () => {
@@ -56,9 +52,7 @@ class CountdownTimer extends Component {
   final = () => {
     clearInterval(this.interval);
 
-    this.setState({ runs: false });
-
-    this.startWarning()
+    this.setState({ runs: false })
   };
 
   reset = () => {
@@ -67,9 +61,7 @@ class CountdownTimer extends Component {
       secondsRemaining: 0,
       runs: false,
       pause: false
-    });
-
-    !isTest && this.resetWarning()
+    })
   };
 
   changeSpeed = event => {
@@ -83,28 +75,6 @@ class CountdownTimer extends Component {
         }
       }
     )
-  };
-
-  startWarning = () => {
-    let clockFace = document.querySelector('#clock--face');
-
-    this.warningTimeout = setTimeout(
-      () => {
-        clockFace.classList.toggle('red-text');
-        this.warningTimeout = setTimeout(
-          () => clockFace.classList.toggle('blink'),
-          10000
-        )
-      },
-      20000
-    )
-  };
-
-  resetWarning = () => {
-    clearInterval(this.warningTimeout);
-
-    let clockFace = document.querySelector('#clock--face');
-    clockFace.classList.remove('red-text', 'blink');
   };
 
   render() {
