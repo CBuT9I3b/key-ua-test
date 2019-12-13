@@ -82,42 +82,44 @@ class CountdownTimer extends Component {
     let halfway = secondsRemaining < Math.floor(startTime / 2);
 
     return (
-      <>
-        {halfway && (
-          <div className='message'>
-            <h4 className='center-align'>
-              {secondsRemaining === 0 ? 'Time’s up!' : 'More than halfway there!'}
-            </h4>
-          </div>
-        )}
+      <div className='wrap'>
+        <div className='wrap--app'>
+          {halfway && (
+            <div className='message'>
+              <h4 className='center-align'>
+                {secondsRemaining === 0 ? 'Time’s up!' : 'More than halfway there!'}
+              </h4>
+            </div>
+          )}
 
-        <ClockFace
-          time={secondsRemaining}
-          startTime={startTime}
-          secondsRemaining={secondsRemaining}
-        />
-
-        <div className='control--panel'>
-          <SelectSpeed
-            speed={speed}
-            handleChange={this.changeSpeed}
+          <ClockFace
+            time={secondsRemaining}
+            startTime={startTime}
+            secondsRemaining={secondsRemaining}
           />
 
-          <Button disabled={runs || secondsRemaining === 0} onClick={this.start}>Start</Button>
+          <div className='control--panel'>
+            <SelectSpeed
+              speed={speed}
+              handleChange={this.changeSpeed}
+            />
 
-          {pause ?
-            <Button onClick={this.resume}>Resume </Button> :
-            <Button disabled={!runs} onClick={this.pause}>Pause</Button>
-          }
+            <Button disabled={runs || secondsRemaining === 0} onClick={this.start}>Start</Button>
 
-          <Button disabled={!pause && runs} onClick={this.reset}>Reset</Button>
+            {pause ?
+              <Button onClick={this.resume}>Resume </Button> :
+              <Button disabled={!runs} onClick={this.pause}>Pause</Button>
+            }
+
+            <Button disabled={!pause && runs} onClick={this.reset}>Reset</Button>
+          </div>
+
+          <InputPanel
+            runs={runs}
+            setTime={this.setTime}
+          />
         </div>
-
-        <InputPanel
-          runs={runs}
-          setTime={this.setTime}
-        />
-      </>
+      </div>
     )
   }
 }

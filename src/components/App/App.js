@@ -1,15 +1,16 @@
 import React from 'react'
+import { Provider } from 'react-redux'
+import { configureStore } from '../../store'
+import { timerReducer } from '../../reducers'
 
 import { CountdownTimer } from '..'
 
-import './App.css'
+const store =  configureStore(timerReducer);
 
 const App = () => (
-  <div className='wrap'>
-    <div className='wrap--app'>
-      <CountdownTimer />
-    </div>
-  </div>
+  <Provider store={store}>
+    <CountdownTimer />
+  </Provider>
 );
 
 export default App
