@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import { Button } from '..'
+
+import { setTime } from '../../actions'
 
 import './InputPanel.css'
 
@@ -21,16 +24,15 @@ class InputPanel extends Component {
 
     this.setState(initialState);
 
-    this.props.setTime(time)
+    this.props.dispatch(setTime(time))
   };
 
   render() {
     let { minutes, seconds } = this.state;
-    let { runs } = this.props;
-    let isInvalid = runs || (minutes * 60 + seconds) <= 0;
+    let { isRuns } = this.props;
+    let isInvalid = isRuns || (minutes * 60 + seconds) <= 0;
 
     if (minutes < 10) { minutes = '0' + minutes }
-
     if (seconds < 10) { seconds = '0' + seconds }
 
     return (
@@ -49,4 +51,6 @@ class InputPanel extends Component {
   }
 }
 
-export default InputPanel
+const mapStateToProps = ({ isRuns }) => ({ isRuns });
+
+export default connect(mapStateToProps)(InputPanel)

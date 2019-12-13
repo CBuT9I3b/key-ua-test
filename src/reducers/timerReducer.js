@@ -8,8 +8,8 @@ const initialState = {
   secondsRemaining: 0,
   speed: 1,
   iterator: null,
-  runs: false,
-  pause: false
+  isRuns: false,
+  isPause: false
 };
 
 export const timerReducer = (state = initialState, action) => {
@@ -24,8 +24,8 @@ export const timerReducer = (state = initialState, action) => {
       return {
         ...state,
         iterator: action.iterator,
-        runs: true,
-        pause: false
+        isRuns: true,
+        isPause: false
       };
     case TICK_TIMER:
       return {
@@ -36,16 +36,21 @@ export const timerReducer = (state = initialState, action) => {
       return {
         ...state,
         iterator: null,
-        pause: false
+        isPause: true
       };
     case FINAL_TIMER:
       return {
         ...state,
         iterator: null,
-        runs: false
+        isRuns: false
       };
     case RESET_TIMER:
-      return initialState;
+      return {
+        ...state,
+        startTime: 0,
+        secondsRemaining: 0,
+        isRuns: false
+      };
     case CHANGE_SPEED:
       return {
         ...state,

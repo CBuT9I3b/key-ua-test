@@ -1,8 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
-const SelectSpeed = ({ speed, handleChange }) => (
+import { change } from '../../actions'
+
+const SelectSpeed = ({ dispatch, speed }) => (
   <div className='input-field'>
-    <select name='speed' onChange={handleChange} defaultValue={speed}>
+    <select name='speed' onChange={event => dispatch(change(event.target.value))} defaultValue={speed}>
       <option value='1'>x1.0</option>
       <option value='1.5'>x1.5</option>
       <option value='2'>x2.0</option>
@@ -11,4 +14,6 @@ const SelectSpeed = ({ speed, handleChange }) => (
   </div>
 );
 
-export default SelectSpeed
+const mapStateToProps = ({ speed }) => ({ speed });
+
+export default connect(mapStateToProps)(SelectSpeed)
