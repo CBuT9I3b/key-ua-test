@@ -20,12 +20,9 @@ describe('reducer', () => {
   });
 
   it('handle START_TIMER', () => {
-    let iterator = setInterval();
     expect(timerReducer({}, {
-      type: START_TIMER,
-      iterator: iterator
+      type: START_TIMER
     })).toEqual({
-      iterator: iterator,
       isRuns: true,
       isPause: false
     })
@@ -44,7 +41,6 @@ describe('reducer', () => {
     expect(timerReducer({}, {
       type: PAUSE_TIMER
     })).toEqual({
-      iterator: null,
       isPause: true
     })
   });
@@ -53,7 +49,6 @@ describe('reducer', () => {
     expect(timerReducer({}, {
       type: FINAL_TIMER
     })).toEqual({
-      iterator: null,
       isRuns: false
     })
   });

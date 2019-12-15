@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 export const MessagePanel = ({ startTime, secondsRemaining }) => {
-  let halfway = secondsRemaining <= Math.floor(startTime / 2);
+  let halfway = !!startTime && secondsRemaining <= Math.floor(startTime / 2);
 
   return halfway && (
     <div className='message'>

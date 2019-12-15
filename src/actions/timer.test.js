@@ -13,13 +13,10 @@ describe('actions', () => {
   });
 
   it('startTimer', () => {
-    let iterator = setInterval();
     let expectedAction = {
-      type: actions.START_TIMER,
-      iterator
+      type: actions.START_TIMER
     };
-    expect(actions.startTimer(iterator)).toEqual(expectedAction);
-    clearInterval(iterator)
+    expect(actions.startTimer()).toEqual(expectedAction);
   });
 
   it('tickTimer', () => {
@@ -64,14 +61,120 @@ const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
 
 describe('thunk functions', () => {
-  let store = mockStore();
-
   it('startTimer', () => {
+    let store = mockStore();
+
     let expectedActions = [
-      { type: actions.START_TIMER, iterator: 17 },
+      { type: actions.START_TIMER },
+      { type: actions.TICK_TIMER }
     ];
 
+    jest.useFakeTimers();
+
     store.dispatch(actions.start());
-    expect(store.getActions()).toEqual(expectedActions)
+
+    jest.runOnlyPendingTimers();
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('tick secondsRemaining = 10', () => {
+    let store = mockStore({
+      startTime: 10,
+      secondsRemaining: 10
+    });
+
+    let expectedActions = [
+      { type: actions.TICK_TIMER }
+    ];
+
+    store.dispatch(actions.tick());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('tick if secondsRemaining = 0', () => {
+    let store = mockStore({
+      startTime: 10,
+      secondsRemaining: 0
+    });
+
+    let expectedActions = [
+      { type: actions.FINAL_TIMER }
+    ];
+
+    store.dispatch(actions.tick());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('pause', () => {
+    let store = mockStore();
+
+    let expectedActions = [
+      { type: actions.PAUSE_TIMER }
+    ];
+
+    store.dispatch(actions.pause());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('final', () => {
+    let store = mockStore();
+
+    let expectedActions = [
+      { type: actions.FINAL_TIMER }
+    ];
+
+    store.dispatch(actions.final());
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('change isRuns false', () => {
+    let store = mockStore({
+      isRuns: false,
+      isPause: false
+    });
+
+    let expectedActions = [
+      { type: actions.CHANGE_SPEED, speed: 3 }
+    ];
+
+    store.dispatch(actions.change(3));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('change isRuns true isPause true', () => {
+    let store = mockStore({
+      isRuns: true,
+      isPause: true
+    });
+
+    let expectedActions = [
+      { type: actions.CHANGE_SPEED, speed: 3 }
+    ];
+
+    store.dispatch(actions.change(3));
+
+    expect(store.getActions()).toEqual(expectedActions);
+  });
+
+  it('change isRuns true', () => {
+    let store = mockStore({
+      isRuns: true,
+      isPause: false
+    });
+
+    let expectedActions = [
+      { type: actions.CHANGE_SPEED, speed: 3 },
+      { type: actions.START_TIMER }
+    ];
+
+    store.dispatch(actions.change(3));
+
+    expect(store.getActions()).toEqual(expectedActions);
   })
 });

@@ -7,7 +7,6 @@ export const initialState = {
   startTime: 0,
   secondsRemaining: 0,
   speed: 1,
-  iterator: null,
   isRuns: false,
   isPause: false
 };
@@ -23,7 +22,6 @@ export const timerReducer = (state = initialState, action) => {
     case START_TIMER:
       return {
         ...state,
-        iterator: action.iterator,
         isRuns: true,
         isPause: false
       };
@@ -35,13 +33,11 @@ export const timerReducer = (state = initialState, action) => {
     case PAUSE_TIMER:
       return {
         ...state,
-        iterator: null,
         isPause: true
       };
     case FINAL_TIMER:
       return {
         ...state,
-        iterator: null,
         isRuns: false
       };
     case RESET_TIMER:

@@ -15,9 +15,8 @@ export const setTime = time => ({
   time
 });
 
-export const startTimer = iterator => ({
+export const startTimer = () => ({
   type: START_TIMER,
-  iterator
 });
 
 export const tickTimer = () => ({
@@ -43,14 +42,16 @@ export const changeSpeed = speed => ({
 
 // thunk functions
 
+let iterator = null;
+
 export const start = () => (dispatch, getState) => {
-  let iterator = setInterval(
+  dispatch(startTimer());
+  iterator = setInterval(
     () => dispatch(tick()),
-    1000 / getState().speed);
-  dispatch(startTimer(iterator))
+    1000 / getState().speed)
 };
 
-const tick = () => (dispatch, getState) => {
+export const tick = () => (dispatch, getState) => {
   if (getState().secondsRemaining === 0) {
     dispatch(final())
   } else {
@@ -58,18 +59,18 @@ const tick = () => (dispatch, getState) => {
   }
 };
 
-export const pause = () => (dispatch, getState) => {
-  clearInterval(getState().iterator);
+export const pause = () => dispatch => {
+  clearInterval(iterator);
   dispatch(pauseTimer())
 };
 
-export const final = () => (dispatch, getState) => {
-  clearInterval(getState().iterator);
+export const final = () => dispatch => {
+  clearInterval(iterator);
   dispatch(finalTimer())
 };
 
 export const change = newSpeed => (dispatch, getState) => {
-  let { iterator, isRuns, isPause } = getState();
+  let { isRuns, isPause } = getState();
   dispatch(changeSpeed(newSpeed));
   if (isRuns && !isPause) {
     clearInterval(iterator);
