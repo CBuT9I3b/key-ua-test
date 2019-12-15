@@ -41,17 +41,37 @@ describe('test InputPanel', () => {
     })
   });
 
-  let button = panel.find('button');
-
-  it('test button disabled', () => {
-    button.simulate('click');
-    expect(props.dispatch).toBeCalledTimes(0)
-  });
-
-  it('test button not disabled', () => {
+  describe('test submit', () => {
     panel.setState({ minutes: 1 });
 
-    button.simulate('click');
-    expect(props.dispatch).toBeCalledTimes(1)
+    beforeEach(() => {
+      panel.find('form').simulate('submit', {
+        preventDefault: () => {}
+      })
+    });
+
+    it('submit', () => {
+      expect(props.dispatch).toBeCalledTimes(1)
+    });
+
+    afterEach(() => {
+      panel.setState(initialState)
+    })
+  });
+
+  describe('test button', () => {
+    let button = panel.find('button');
+
+    it('test button disabled', () => {
+      button.simulate('click');
+      expect(props.dispatch).toBeCalledTimes(1)
+    });
+
+    it('test button not disabled', () => {
+      panel.setState({ minutes: 1 });
+
+      button.simulate('click');
+      expect(props.dispatch).toBeCalledTimes(2)
+    })
   })
 });

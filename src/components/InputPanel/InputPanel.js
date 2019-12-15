@@ -36,20 +36,22 @@ export class InputPanel extends Component {
     if (seconds < 10) { seconds = '0' + seconds }
 
     return (
-      <div className='input--panel'>
+      <form className='input--panel' onSubmit={this.setTime}>
         <div className='input-field'>
           <label htmlFor='minutes' >Minutes</label>
           <input value={minutes} onChange={this.handleChange} id='minutes' type='number' min='0' max='60' />
         </div>
         <div className='input-field'>
           <label htmlFor='seconds' >Seconds</label>
-          <input value={seconds} onChange={this.handleChange} id='seconds' type='number' min='0' max='60' />
+          <input value={seconds} onChange={this.handleChange} id='seconds' type='number' min='0' max='59' />
         </div>
         <Button
           id='btn--enter--time'
+          type='submit'
           disabled={isInvalid}
-          onClick={this.setTime}>Enter Time</Button>
-      </div>
+          onClick={this.setTime}
+        >Enter Time</Button>
+      </form>
     )
   }
 }
