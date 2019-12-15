@@ -1,5 +1,9 @@
 .input--panel {
   display: flex;
   align-items: baseline;
-  justify-content: space-around;
+  justify-content: space-between;
+}
+
+#btn--enter--time {
+  background-color: #2196f3;
 }

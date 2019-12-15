@@ -7,21 +7,36 @@ import { start, pause, resetTimer } from '../../actions'
 
 import './ControlPanel.css'
 
-export const ControlPanel = ({ dispatch, secondsRemaining, isRuns, isPause }) => (
+export const ControlPanel = ({ dispatch, startTime, secondsRemaining, isRuns, isPause }) => (
   <div className='control--panel'>
     <SelectSpeed />
 
-    <Button disabled={isRuns || secondsRemaining === 0} onClick={() => dispatch(start())}>Start</Button>
+    <Button
+      id='btn--start'
+      disabled={isRuns || secondsRemaining === 0}
+      onClick={() => dispatch(start())}
+    >Start</Button>
 
     {isPause ?
-      <Button onClick={() => dispatch(start())}>Resume</Button> :
-      <Button disabled={!isRuns} onClick={() => dispatch(pause())}>Pause</Button>
+      <Button
+        id='btn--resume'
+        onClick={() => dispatch(start())}
+      >Resume</Button> :
+      <Button
+        id='btn--pause'
+        disabled={!isRuns}
+        onClick={() => dispatch(pause())}
+      >Pause</Button>
     }
 
-    <Button disabled={!isPause && isRuns} onClick={() => dispatch(resetTimer())}>Reset</Button>
+    <Button
+      id='btn--reset'
+      disabled={(!startTime || isRuns) && !isPause}
+      onClick={() => dispatch(resetTimer())}
+    >Reset</Button>
   </div>
 );
 
-const mapStateToProps = ({ secondsRemaining, isRuns, isPause }) => ({ secondsRemaining, isRuns, isPause });
+const mapStateToProps = ({ startTime, secondsRemaining, isRuns, isPause }) => ({ startTime, secondsRemaining, isRuns, isPause });
 
 export default connect(mapStateToProps)(ControlPanel)

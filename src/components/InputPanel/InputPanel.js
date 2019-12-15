@@ -45,7 +45,10 @@ export class InputPanel extends Component {
           <label htmlFor='seconds' >Seconds</label>
           <input value={seconds} onChange={this.handleChange} id='seconds' type='number' min='0' max='60' />
         </div>
-        <Button disabled={isInvalid} onClick={this.setTime}>Input Time</Button>
+        <Button
+          id='btn--enter--time'
+          disabled={isInvalid}
+          onClick={this.setTime}>Enter Time</Button>
       </div>
     )
   }
