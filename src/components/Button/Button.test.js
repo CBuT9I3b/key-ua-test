@@ -3,24 +3,22 @@ import { shallow } from 'enzyme'
 
 import Button from './Button'
 
-it('renders without crashing', () => {
-  shallow(<Button />)
-});
-
-describe('test button', () => {
-  let mock = jest.fn();
-
+describe('test Button', () => {
   let props = {
-    onClick: mock
+    children: 'Button',
+    onClick: jest.fn()
   };
 
   let button = shallow(<Button {...props} />);
 
-  button.find('button').simulate('click', {
-    preventDefault: () => {}
+  it('render Button', () => {
+    expect(button.length).toEqual(1);
+    expect(button.find('button').text()).toEqual(props.children)
   });
 
+  button.simulate('click');
+
   it('test click', () => {
-    expect(mock).toHaveBeenCalledTimes(1)
+    expect(props.onClick).toHaveBeenCalledTimes(1)
   })
 });

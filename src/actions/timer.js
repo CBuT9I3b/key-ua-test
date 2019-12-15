@@ -15,20 +15,20 @@ export const setTime = time => ({
   time
 });
 
-const startTimer = iterator => ({
+export const startTimer = iterator => ({
   type: START_TIMER,
   iterator
 });
 
-const tickTimer = () => ({
+export const tickTimer = () => ({
   type: TICK_TIMER
 });
 
-const pauseTimer = () => ({
+export const pauseTimer = () => ({
   type: PAUSE_TIMER
 });
 
-const finalTimer = () => ({
+export const finalTimer = () => ({
   type: FINAL_TIMER
 });
 
@@ -36,10 +36,12 @@ export const resetTimer = () => ({
   type: RESET_TIMER
 });
 
-const changeSpeed = speed => ({
+export const changeSpeed = speed => ({
   type: CHANGE_SPEED,
   speed
 });
+
+// thunk functions
 
 export const start = () => (dispatch, getState) => {
   let iterator = setInterval(

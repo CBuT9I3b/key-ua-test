@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import './ClockFace.css'
 
-const ClockFace = ({ startTime, secondsRemaining }) => {
+export const ClockFace = ({ startTime, secondsRemaining }) => {
   let minutes = Math.floor(secondsRemaining / 60);
   let seconds = secondsRemaining - (minutes * 60);
 

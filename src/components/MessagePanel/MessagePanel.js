@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-const MessagePanel = ({ startTime, secondsRemaining }) => {
-  let halfway = secondsRemaining < Math.floor(startTime / 2);
+export const MessagePanel = ({ startTime, secondsRemaining }) => {
+  let halfway = secondsRemaining <= Math.floor(startTime / 2);
 
   return halfway && (
     <div className='message'>
@@ -12,7 +12,6 @@ const MessagePanel = ({ startTime, secondsRemaining }) => {
     </div>
   )
 };
-
 
 const mapStateToProps = ({ startTime, secondsRemaining }) => ({ startTime, secondsRemaining });
 

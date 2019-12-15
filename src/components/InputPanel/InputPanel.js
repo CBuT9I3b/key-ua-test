@@ -12,7 +12,7 @@ const initialState = {
   seconds: 0
 };
 
-class InputPanel extends Component {
+export class InputPanel extends Component {
   state = initialState;
 
   handleChange = event => {

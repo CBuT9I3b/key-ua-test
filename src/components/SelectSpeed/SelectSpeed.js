@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { change } from '../../actions'
 
-const SelectSpeed = ({ dispatch, speed }) => (
+export const SelectSpeed = ({ dispatch, speed }) => (
   <div className='input-field'>
     <select name='speed' onChange={event => dispatch(change(event.target.value))} defaultValue={speed}>
       <option value='1'>x1.0</option>

@@ -7,7 +7,7 @@ import { CountdownTimer } from '..'
 
 const store =  configureStore(timerReducer);
 
-const App = () => (
+export const App = () => (
   <Provider store={store}>
     <CountdownTimer />
   </Provider>

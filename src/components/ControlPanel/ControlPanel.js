@@ -7,7 +7,7 @@ import { start, pause, resetTimer } from '../../actions'
 
 import './ControlPanel.css'
 
-const ControlPanel = ({ dispatch, secondsRemaining, isRuns, isPause }) => (
+export const ControlPanel = ({ dispatch, secondsRemaining, isRuns, isPause }) => (
   <div className='control--panel'>
     <SelectSpeed />
 

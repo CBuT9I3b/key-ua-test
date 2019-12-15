@@ -3,7 +3,7 @@ import {
   FINAL_TIMER, RESET_TIMER, CHANGE_SPEED
 } from '../actions'
 
-const initialState = {
+export const initialState = {
   startTime: 0,
   secondsRemaining: 0,
   speed: 1,
@@ -49,7 +49,8 @@ export const timerReducer = (state = initialState, action) => {
         ...state,
         startTime: 0,
         secondsRemaining: 0,
-        isRuns: false
+        isRuns: false,
+        isPause: false
       };
     case CHANGE_SPEED:
       return {

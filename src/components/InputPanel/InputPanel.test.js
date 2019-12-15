@@ -1,44 +1,57 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
 
-import InputPanel from './InputPanel'
+import { InputPanel } from './InputPanel'
 
-it('renders without crashing', () => {
-  shallow(<InputPanel />)
-});
-
-describe('input panel', () => {
-  let mock = jest.fn();
+describe('test InputPanel', () => {
+  let initialState = {
+    minutes: 0,
+    seconds: 0
+  };
 
   let props = {
-    setTime: mock
+    dispatch: jest.fn(),
+    isRuns: false
   };
 
   let panel = mount(<InputPanel {...props} />);
 
+  it('render InputPanel', () => {
+    expect(panel.length).toEqual(1)
+  });
+
   describe('test change', () => {
-    let minutes = 2;
+    let minutes = 1;
 
     beforeEach(() => {
       panel.find('#minutes').simulate('change', {
-        target : {
-          value: minutes
+        target: {
+          value: minutes,
+          id: 'minutes'
         }
       })
     });
 
-    it('change', () => {
+    it('updates minutes', () => {
       expect(panel.state().minutes).toEqual(minutes)
+    });
+
+    afterEach(() => {
+      panel.setState(initialState)
     })
   });
 
-  describe('test click', () => {
-    panel.find('button').simulate('click', {
-      preventDefault: () => {}
-    });
+  let button = panel.find('button');
 
-    it('click', () => {
-      expect(mock).toHaveBeenCalledTimes(1)
-    })
+  it('test button disabled', () => {
+    button.simulate('click');
+    expect(props.dispatch).toBeCalledTimes(0)
+  });
+
+  it('test button not disabled', () => {
+    panel.setState({ minutes: 1 });
+
+    button.simulate('click');
+    expect(props.dispatch).toBeCalledTimes(1)
   })
 });
