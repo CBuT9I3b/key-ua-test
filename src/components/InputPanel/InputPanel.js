@@ -19,10 +19,10 @@ export class InputPanel extends Component {
     this.setState({ [event.target.id]: +event.target.value })
   };
 
-  setTime = () => {
-    let time = this.state.minutes * 60 + this.state.seconds;
+  setTime = event => {
+    event.preventDefault();
 
-    this.setState(initialState);
+    let time = this.state.minutes * 60 + this.state.seconds;
 
     this.props.dispatch(setTime(time))
   };
@@ -37,7 +37,6 @@ export class InputPanel extends Component {
         <div className='input-field'>
           <label htmlFor='minutes' >Minutes</label>
           <input
-            placeholder='1'
             value={minutes}
             onChange={this.handleChange}
             id='minutes'
@@ -48,7 +47,6 @@ export class InputPanel extends Component {
         <div className='input-field'>
           <label htmlFor='seconds' >Seconds</label>
           <input
-            placeholder='0'
             value={seconds}
             onChange={this.handleChange}
             id='seconds'
