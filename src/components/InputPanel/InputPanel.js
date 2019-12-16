@@ -8,8 +8,8 @@ import { setTime } from '../../actions'
 import './InputPanel.css'
 
 const initialState = {
-  minutes: 0,
-  seconds: 0
+  minutes: '',
+  seconds: ''
 };
 
 export class InputPanel extends Component {
@@ -32,18 +32,29 @@ export class InputPanel extends Component {
     let { isRuns } = this.props;
     let isInvalid = isRuns || (minutes * 60 + seconds) <= 0;
 
-    if (minutes < 10) { minutes = '0' + minutes }
-    if (seconds < 10) { seconds = '0' + seconds }
-
     return (
       <form className='input--panel' onSubmit={this.setTime}>
         <div className='input-field'>
           <label htmlFor='minutes' >Minutes</label>
-          <input value={minutes} onChange={this.handleChange} id='minutes' type='number' min='0' max='60' />
+          <input
+            placeholder='1'
+            value={minutes}
+            onChange={this.handleChange}
+            id='minutes'
+            type='number'
+            min='0' max='60'
+          />
         </div>
         <div className='input-field'>
           <label htmlFor='seconds' >Seconds</label>
-          <input value={seconds} onChange={this.handleChange} id='seconds' type='number' min='0' max='59' />
+          <input
+            placeholder='0'
+            value={seconds}
+            onChange={this.handleChange}
+            id='seconds'
+            type='number'
+            min='0' max='59'
+          />
         </div>
         <Button
           id='btn--enter--time'
