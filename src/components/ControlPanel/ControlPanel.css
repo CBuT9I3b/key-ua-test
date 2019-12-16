@@ -1,0 +1,18 @@
+.control--panel {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+#btn--start, #btn--resume {
+  background-color: #4caf50;
+}
+
+#btn--pause {
+  color: #000000;
+  background-color: #ffeb3b;
+}
+
+#btn--reset {
+  background-color: #f44336;
+}

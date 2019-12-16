@@ -1,0 +1,18 @@
+.wrap {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrap--app {
+  position: relative;
+  padding-top: 25px;
+  width: 450px;
+}
+
+.message {
+  position: absolute;
+  width: 450px;
+  top: 0;
+}
