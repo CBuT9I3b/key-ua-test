@@ -31,7 +31,7 @@ Build a countdown timer SPA in a framework library of your choosing (ie - React,
 * `create-react-app` for deployment of the working environment.
 * `redux` and `redux-thunk` for global storage.
 * `materialize-css` for styles.
-* `jest` and `enzyme` for tests.
+* `jest` and `enzyme` for tests (coverage Stmts - 89.66%, Branch - 90.91%, Funcs - 77.5%, Lines - 93.68%).
 
 ### Runs this app in development mode:
 
